@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  covidapp:
+    image: analythium/covidapp-shiny:minimal
+    restart: unless-stopped
+    ports:
+      - 80:3838
+  shinyproxy:
+    image: openanalytics/shinyproxy-snapshot
+    user: root:root
+    hostname: shinyproxy
+    restart: unless-stopped
+    ports:
+      - 8989:8080
+  home_page:
+    build: ./ShinyGallery
+    ports:
+      - 7070:8686
